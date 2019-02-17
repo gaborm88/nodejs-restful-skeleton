@@ -1,0 +1,25 @@
+{
+  "name": "todo-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon src/server.js --exec babel-node",
+    "build": "babel src -d dist",
+    "serve": "node dist/server.js",
+    "test": "mocha --require babel-register"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.13"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "nodemon": "^1.18.10"
+  }
+}
