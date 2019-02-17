@@ -1,4 +1,4 @@
 import config from './config';
-import app from './app';
+import api from './api/api';
 
-app.listen(config.port, () => console.log(`Express server listening on port ${config.port}`));
+api.listen(config.port, () => console.log(`Express server listening on port ${config.port}`));
