@@ -1,0 +1,10 @@
+version: "3"
+services:
+  mongo-server:
+    image: "mongo"
+    restart: always
+  node-app:
+    restart: always
+    build: .
+    ports:
+      - "4000:4000"
