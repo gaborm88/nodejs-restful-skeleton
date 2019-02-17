@@ -1,11 +1,9 @@
 import express from 'express';
-import bodyParser from 'body-parser';
 
 import User from '../../dal/model/UserSchema';
+import UserController from '../../controller/UserController';
 
 export default class UserApiController {
-
-  constructor () {}
 
   init(){
     const router = express.Router();
@@ -17,18 +15,27 @@ export default class UserApiController {
     return router;
   }
 
-  getAllHandler(req, res) {
-    User.find({}, (err, users) => {
-      if (err) return res.status(500).send('There was a problem finding the users.');
-      res.status(200).send(users);
-    });
+  async getAllHandler(req, res) {
+    const userController = new UserController();
+
+    const users = await userController.findAll();
+
+    res.status(200).send(users);
   }
 
-  getByIdHandler(req, res) {
-    User.findById(req.params.id, (err, user) => {
-      if (err) return res.status(500).send('There was a problem finding the user.');
-      res.status(200).send(user);
-    });
+  async getByIdHandler(req, res) {
+    const userController = new UserController();
+    
+    // const user = await userController.findByIdAwaitVersion(req.params.id);
+
+    const user = userController.findByIdAwaitVersion(req.params.id);
+    
+    user
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Error get by id')
+      });
   }
 
   postHandler(req, res) {

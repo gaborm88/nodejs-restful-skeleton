@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 
 import AddressSchema from './AddressSchema';
 
-// created updated
+// TODO created updated
 
 const UserSchema = new mongoose.Schema({
   firstName: String,
