@@ -6,3 +6,4 @@ NodeJs restful service with express, mongo, babel and docker.
 - Separate config per environment: dev, test prod.
 - Tests
 - Fix todo in the code
+- Extend readme with startup commands
