@@ -4,11 +4,11 @@ export default class UserController {
 
   constructor() {
   }
-  // async await not needed, why?
-  async findAll(){
+
+  findAll(){
     const userDao = new UserDao();
     
-    return await userDao.findAll();
+    return userDao.findAll();
   }
 
   findById(id){
@@ -20,10 +20,26 @@ export default class UserController {
   async findByIdAwaitVersion(id){
     const userDao = new UserDao();
     
-    const a = await userDao.findById(id)
-    console.log('asd', a)
+    const user = await userDao.findById(id)
 
-    return a;
+    return user;
   }
-  
+
+  create(user){
+    const userDao = new UserDao();
+
+    return userDao.create(user);
+  }
+
+  delete(id){
+    const userDao = new UserDao();
+
+    return userDao.deleteById(id);
+  }
+
+  update(id, user){
+    const userDao = new UserDao();
+
+    return userDao.updateById(id, user);
+  }
 }

@@ -28,9 +28,7 @@ export default class UserApiController {
     
     // const user = await userController.findByIdAwaitVersion(req.params.id);
 
-    const user = userController.findByIdAwaitVersion(req.params.id);
-    
-    user
+    userController.findByIdAwaitVersion(req.params.id)
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
@@ -40,30 +38,41 @@ export default class UserApiController {
 
   postHandler(req, res) {
     console.log(JSON.stringify(req.body, null, 2));
-    User.create({
+    const userController = new UserController();
+
+    userController.create({
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       login: req.body.login,
       addresses: req.body.addresses,
-    }, (err, user) => {
-      console.log(`created: ${JSON.stringify(user, null, 2)}`);
-      if (err) return res.status(500).send('There was a problem adding the information to the database.');
-      res.status(200).send(user);
-    });
+    })
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Creation error')
+      });
   }
 
   deleteByIdHandler(req, res){
-    User.findByIdAndRemove(req.params.id, (err, user) => {
-      if (err) return res.status(500).send('There was a problem deleting the user.');
-      res.status(200).send(`User: ${user.lastName} ${user.firstName} was deleted.`);
-    });
+    const userController = new UserController();
+
+    userController.delete(req.params.id)
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Delete error')
+      });
   }
 
   updateByIdHandler(req, res){
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
-      if (err) return res.status(500).send('There was a problem updating the user.');
-      res.status(200).send(user);
-    });
+    const userController = new UserController();
+
+    userController.update(req.params.id, req.body)
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Update error')
+      });
   }
 }
 
