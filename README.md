@@ -2,9 +2,11 @@
 
 NodeJs restful service with express, mongo, babel and docker. 
 
+#### Start:
+docker-compose up --build
+
 ##### Todo:
-- Separate config per environment: dev, test prod.
-- Tests
 - JWT authentication
+- Tests
 - Fix todo in the code
-- Extend readme with startup commands
+- Extend readme
