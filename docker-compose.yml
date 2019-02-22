@@ -8,3 +8,7 @@ services:
     build: .
     ports:
       - "4000:4000"
+    environment:
+      - MONGO_URL=mongodb://mongo-server/admin
+      - PORT=4000
+

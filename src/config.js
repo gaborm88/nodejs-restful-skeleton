@@ -1,5 +1,7 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 module.exports = {
-  port: process.env.PORT || 4000,
-  mongodb: 'mongodb://localhost:27017/admin',
+  port: process.env.PORT,
+  mongodb: process.env.MONGO_URL,
 };
-// mongodb: 'mongodb://mongo-server/admin',

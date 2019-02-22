@@ -37,7 +37,7 @@ export default class UserApiController {
   }
 
   postHandler(req, res) {
-    console.log(JSON.stringify(req.body, null, 2));
+    //console.log(JSON.stringify(req.body, null, 2));
     const userController = new UserController();
 
     userController.create({
