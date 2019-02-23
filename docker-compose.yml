@@ -3,12 +3,16 @@ services:
   mongo-server:
     image: "mongo"
     restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=userdb
+    #  - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+    #  - MONGO_INITDB_ROOT_PASSWORD=secret
   node-app:
     restart: always
     build: .
     ports:
       - "4000:4000"
     environment:
-      - MONGO_URL=mongodb://mongo-server/admin
+      - MONGO_URL=mongodb://mongo-server/userdb
       - PORT=4000
 
