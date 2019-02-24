@@ -5,7 +5,7 @@ import UserController from '../../controller/UserController';
 
 export default class UserApiController {
 
-  init(){
+  routes(){
     const router = express.Router();
     router.get('/', this.getAllHandler.bind(this));
     router.post('/', this.postHandler.bind(this));

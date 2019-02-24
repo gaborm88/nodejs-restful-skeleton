@@ -15,4 +15,3 @@ services:
     environment:
       - MONGO_URL=mongodb://mongo-server/userdb
       - PORT=4000
-
