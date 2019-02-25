@@ -18,9 +18,12 @@ export default class UserApiController {
   async getAllHandler(req, res) {
     const userController = new UserController();
 
-    const users = await userController.findAll();
-
-    res.status(200).send(users);
+    const users = await userController.findAll()
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Error get all')
+      });
   }
 
   async getByIdHandler(req, res) {
@@ -28,7 +31,7 @@ export default class UserApiController {
     
     // const user = await userController.findByIdAwaitVersion(req.params.id);
 
-    userController.findByIdAwaitVersion(req.params.id)
+    userController.findById(req.params.id)
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);

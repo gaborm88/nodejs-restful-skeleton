@@ -5,41 +5,48 @@ export default class UserController {
   constructor() {
   }
 
-  findAll(){
+  async findAll(){
     const userDao = new UserDao();
-    
-    return userDao.findAll();
+    console.log(this.self)
+    const users = await userDao.findAll();
+    return users.map(user => this.populateDisplayName(user));
   }
 
-  findById(id){
+  async findById(id){
     const userDao = new UserDao();
 
-    return userDao.findById(id);
+    return await userDao.findById(id).then(u => this.populateDisplayName(u));
   }
 
   async findByIdAwaitVersion(id){
     const userDao = new UserDao();
     
-    const user = await userDao.findById(id)
-
-    return user;
+    return await userDao.findById(id);
   }
 
-  create(user){
+  async create(user){
     const userDao = new UserDao();
 
-    return userDao.create(user);
+    return await userDao.create(user);
   }
 
-  delete(id){
+  async delete(id){
     const userDao = new UserDao();
 
-    return userDao.deleteById(id);
+    return await userDao.deleteById(id);
   }
 
-  update(id, user){
+  async update(id, user){
     const userDao = new UserDao();
 
-    return userDao.updateById(id, user);
+    return await userDao.updateById(id, user);
+  }
+
+  populateDisplayName(user){
+    console.log(user)
+    return {
+      ...user,
+      displayName: `${user.firstName} ${user.lastName}`
+    }
   }
 }

@@ -4,21 +4,17 @@ export default class UserDao {
   
   constructor() {
   }
-  // TODO better error handling
+
   async findAll() {
-    try {
-      return await UserSchema.find({});
-    } catch(err) {
-      console.log(err);
-    }
+    return await UserSchema.find({}).lean();
   }
  
-  findById(id) {
-    return UserSchema.findById(id);
+  async findById(id) {
+    return await UserSchema.findById(id).lean();
   }
 
-  create(user) {
-    return UserSchema.create({
+  async create(user) {
+    return await UserSchema.create({
       firstName: user.firstName,
       lastName: user.lastName,
       login: user.login,
@@ -26,11 +22,11 @@ export default class UserDao {
     });
   }
 
-  deleteById(id){
-    return UserSchema.findByIdAndRemove(id)
+  async deleteById(id){
+    return await UserSchema.findByIdAndRemove(id).lean();
   }
 
-  updateById(id, user){
-    return UserSchema.findByIdAndUpdate(id, user, { new: true });
+  async updateById(id, user){
+    return await UserSchema.findByIdAndUpdate(id, user, { new: true }).lean();
   }
 }
