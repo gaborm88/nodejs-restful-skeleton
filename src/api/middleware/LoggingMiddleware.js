@@ -3,6 +3,9 @@ export default class LoggingMiddleware {
   addLogging(req, res, next) {
     res.on('finish', () => {
       console.log(JSON.stringify({
+        response: {
+          statusCode: res.statusCode,
+        },
         request: {
           ip: req.ip,
           originalUrl: req.originalUrl,
@@ -10,9 +13,6 @@ export default class LoggingMiddleware {
           params: req.params,
           body: req.body,
         },
-        response: {
-          statusCode: res.statusCode,
-        }
       }));
     });
     
