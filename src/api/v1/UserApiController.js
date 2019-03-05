@@ -18,7 +18,7 @@ export default class UserApiController {
   async getAllHandler(req, res) {
     const userController = new UserController();
 
-    const users = await userController.findAll()
+    userController.findAll()
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
