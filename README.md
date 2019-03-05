@@ -15,7 +15,7 @@ MONGO_URL=mongodb://localhost:27017/admin
 And with npm start the nodemon starts.
 
 ##### Todo:
-- JWT authentication
+- JWT authentication > move /login to an other module, finish the implementation
 - Tests
 - Fix todo in the code
 - Extend readme
