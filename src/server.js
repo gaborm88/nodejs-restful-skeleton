@@ -4,4 +4,6 @@ import db from './db';
 
 db.connect();
 
-api.listen(config.port, () => console.log(`Express server listening on port ${config.port}`));
+const server = api.listen(config.port, () => console.log(`Express server listening on port ${config.port}`));
+
+module.exports = server;
