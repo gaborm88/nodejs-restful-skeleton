@@ -1,14 +1,14 @@
+import express from 'express';
 import jwt from 'jsonwebtoken';
+
 import config from '../../config';
 
-class LoginController {
+module.exports.authRoutes = () => {
+  const router = express.Router();
 
-  constructor() {
-    LoginController.mockedUsername = 'admin';
-    LoginController.mockedPassword = 'password';
-  }
-
-  login (req, res) {
+  router.post('/login', (req, res) => {
+    const mockedUsername = 'admin';
+    const mockedPassword = 'password';
     // todo validator
     const username = req.body.username;
     const password = req.body.password;
@@ -17,15 +17,23 @@ class LoginController {
       return;
     }
     // todo
-    if (username === LoginController.mockedUsername &&
-          password === LoginController.mockedPassword) {
+    if (username === mockedUsername &&
+      password === mockedPassword) {
       const token = jwt.sign({ username: username }, config.secret, { expiresIn: '24h' });
       //res.json({ success: true, token: token });
       res.status(200).send({ success: true, token: token });
     } else {
       res.status(403).send({ success: false });
     }
-  }
-}
+  });
 
-module.exports = LoginController;
+  router.post('/register', (req, res) => {
+
+  });
+
+  router.get('/whoami', (req, res) => {
+
+  });
+
+  return router;
+}

@@ -1,21 +1,11 @@
 import express from 'express';
 
-import User from '../../dal/model/UserSchema';
 import UserController from '../../controller/UserController';
 
-export default class UserApiController {
+module.exports.userRoutes = () => {
+  const router = express.Router();
 
-  routes(){
-    const router = express.Router();
-    router.get('/', this.getAllHandler.bind(this));
-    router.post('/', this.postHandler.bind(this));
-    router.get('/:id', this.getByIdHandler.bind(this));
-    router.delete('/:id', this.deleteByIdHandler.bind(this));
-    router.put('/:id', this.updateByIdHandler.bind(this));
-    return router;
-  }
-
-  async getAllHandler(req, res) {
+  router.get('/', (req, res) => {
     const userController = new UserController();
 
     userController.findAll()
@@ -24,23 +14,9 @@ export default class UserApiController {
         console.log(err);
         res.status(500).send('Error get all')
       });
-  }
+  });
 
-  async getByIdHandler(req, res) {
-    const userController = new UserController();
-    
-    // const user = await userController.findByIdAwaitVersion(req.params.id);
-
-    userController.findById(req.params.id)
-      .then(item => res.status(200).send(item))
-      .catch(err => {
-        console.log(err);
-        res.status(500).send('Error get by id')
-      });
-  }
-
-  postHandler(req, res) {
-    //console.log(JSON.stringify(req.body, null, 2));
+  router.post('/', (req, res) => {
     const userController = new UserController();
 
     userController.create({
@@ -54,9 +30,20 @@ export default class UserApiController {
         console.log(err);
         res.status(500).send('Creation error')
       });
-  }
+  });
 
-  deleteByIdHandler(req, res){
+  router.get('/:id', async (req, res) => {
+    const userController = new UserController();
+
+    userController.findById(req.params.id)
+      .then(item => res.status(200).send(item))
+      .catch(err => {
+        console.log(err);
+        res.status(500).send('Error get by id')
+      });
+  });
+
+  router.delete('/:id', (req, res) => {
     const userController = new UserController();
 
     userController.delete(req.params.id)
@@ -65,9 +52,9 @@ export default class UserApiController {
         console.log(err);
         res.status(500).send('Delete error')
       });
-  }
+  });
 
-  updateByIdHandler(req, res){
+  router.put('/:id', (req, res) => {
     const userController = new UserController();
 
     userController.update(req.params.id, req.body)
@@ -76,7 +63,7 @@ export default class UserApiController {
         console.log(err);
         res.status(500).send('Update error')
       });
-  }
-}
+  });
 
-export const router = new UserApiController().router;
+  return router
+}
