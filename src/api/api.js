@@ -20,6 +20,7 @@ app.use('/login', new LoginController().login);
 app.use(new AuthMiddleware().verifyToken);
 
 // route
+// todo add routes folder - except ping for auth
 app.use('/users', new UserApiController().routes());
 
 module.exports = app;

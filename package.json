@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/server.js --exec babel-node",
-    "debug": "nodemon src/server.js --inspect --exec babel-node",
+    "start": "nodemon src/app.js --exec babel-node",
+    "debug": "nodemon src/app.js --inspect --exec babel-node",
     "build": "babel src -d dist",
-    "serve": "node dist/server.js",
-    "test": "mocha --require @babel/polyfill --require @babel/register --exit"
+    "clean": "rm -rf ./dist; rm -rf ./node_modules",
+    "serve": "node dist/app.js",
+    "test": "mocha --require @babel/polyfill --require @babel/register --exit --timeout 6000"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,7 @@
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.4.17"
+    "mongoose": "^5.4.18"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -30,6 +31,9 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "mocha": "^6.0.2",
-    "nodemon": "^1.18.10"
+    "mongodb-memory-server": "^4.0.1",
+    "nodemon": "^1.18.10",
+    "sinon": "^7.2.7",
+    "sinon-mongoose": "^2.2.1"
   }
 }
