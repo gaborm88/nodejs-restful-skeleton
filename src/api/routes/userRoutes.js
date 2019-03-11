@@ -11,7 +11,7 @@ module.exports.userRoutes = () => {
     userController.findAll()
       .then(item => res.status(200).send(item))
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
         res.status(500).send('Error get all');
       });
   });
@@ -27,7 +27,7 @@ module.exports.userRoutes = () => {
     })
       .then(item => res.status(200).send(item))
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
         res.status(500).send('Creation error');
       });
   });
@@ -38,7 +38,7 @@ module.exports.userRoutes = () => {
     userController.findById(req.params.id)
       .then(item => res.status(200).send(item))
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
         res.status(500).send('Error get by id');
       });
   });
@@ -49,7 +49,7 @@ module.exports.userRoutes = () => {
     userController.delete(req.params.id)
       .then(item => res.status(200).send(item))
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
         res.status(500).send('Delete error');
       });
   });
@@ -60,7 +60,7 @@ module.exports.userRoutes = () => {
     userController.update(req.params.id, req.body)
       .then(item => res.status(200).send(item))
       .catch(err => {
-        console.log(err);
+        console.log(err.message);
         res.status(500).send('Update error');
       });
   });

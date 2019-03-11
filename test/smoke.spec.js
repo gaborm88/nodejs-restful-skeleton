@@ -11,12 +11,6 @@ require('sinon-mongoose');
 chai.use(chaiHttp);
 const expect = chai.expect;
 
-describe("smoke test", function() {
-  it("checks equality", function() {
-    expect(true).to.be.true;
-  });
-});
-
 describe('GET /', () => {
   it('should respond with pong', (done) => {
     chai.request(server)
