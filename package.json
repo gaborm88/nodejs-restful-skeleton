@@ -8,7 +8,7 @@
     "build": "babel src -d dist",
     "clean": "rm -rf ./dist; rm -rf ./node_modules",
     "serve": "node dist/app.js",
-    "test": "mocha --require @babel/polyfill --require @babel/register --exit --timeout 6000"
+    "test": "mocha --require @babel/polyfill --require @babel/register --exit --timeout 6000 --recursive true"
   },
   "keywords": [],
   "author": "",
@@ -31,7 +31,7 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "mocha": "^6.0.2",
-    "mongodb-memory-server": "^4.0.1",
+    "mongodb-memory-server": "^4.0.2",
     "nodemon": "^1.18.10",
     "sinon": "^7.2.7",
     "sinon-mongoose": "^2.2.1"

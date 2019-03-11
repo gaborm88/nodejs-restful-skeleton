@@ -17,10 +17,11 @@ app.use(logging);
 
 app.use('/', pingRoutes);
 app.use('/auth', authRoutes());
+
 // middleware
 app.use(verifyToken);
 
-// route
+// auth required routes
 app.use('/users', userRoutes());
 
 module.exports = app;

@@ -12,7 +12,7 @@ module.exports.userRoutes = () => {
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
-        res.status(500).send('Error get all')
+        res.status(500).send('Error get all');
       });
   });
 
@@ -28,7 +28,7 @@ module.exports.userRoutes = () => {
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
-        res.status(500).send('Creation error')
+        res.status(500).send('Creation error');
       });
   });
 
@@ -39,7 +39,7 @@ module.exports.userRoutes = () => {
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
-        res.status(500).send('Error get by id')
+        res.status(500).send('Error get by id');
       });
   });
 
@@ -50,7 +50,7 @@ module.exports.userRoutes = () => {
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
-        res.status(500).send('Delete error')
+        res.status(500).send('Delete error');
       });
   });
 
@@ -61,9 +61,9 @@ module.exports.userRoutes = () => {
       .then(item => res.status(200).send(item))
       .catch(err => {
         console.log(err);
-        res.status(500).send('Update error')
+        res.status(500).send('Update error');
       });
   });
 
-  return router
+  return router;
 }

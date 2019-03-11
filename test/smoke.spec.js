@@ -28,7 +28,7 @@ describe('GET /', () => {
   });
 });
 
-// todo do crud test for this
+// TODO: do crud test for this
 var User = require('../src/dal/model/UserSchema');
 
 describe("GET /users", function(){
@@ -42,35 +42,5 @@ describe("GET /users", function(){
       expect(result.firstName).to.equal('asd');
       done();
     });
-  });
-});
-
-describe("Successful login", function(){
-  it("should auth successfully", function(done){
-    chai.request(server)
-      .get('/login')
-      .set('Content-Type', 'application/json')
-      .send({username: "admin", password: "password"})
-      .end((err, res) => {
-        console.log('res.body.token', res.body.token)
-        expect(res.body.success).to.true;
-        done();
-      });
-  });
-});
-
-describe("Get users", function(){
-  const dbman = new DBManager();
-  before(async () => { await dbman.start(); });
-  afterEach(async () => { await dbman.cleanup(); });
-  after(async () => { await dbman.stop(); });
-
-  it("should return all users", function(done){
-    chai.request(server)
-      .get('/users')
-      .set('authorization', 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImFkbWluIiwiaWF0IjoxNTUyMTY5ODQ3LCJleHAiOjE1NTIyNTYyNDd9.RW3XLz4oOUZvociny_1aQw8-pVSl2cR7y1HNEMqj7XY')
-      .end((err, res) => {
-        done();
-      });
   });
 });
