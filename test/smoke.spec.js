@@ -1,12 +1,9 @@
 import sinon from 'sinon';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
+import sinonMongoose from 'sinon-mongoose';
+
 import server from '../src/app';
-
-import DBManager from './helper/DbHelper';
-// todo database environment
-
-require('sinon-mongoose');
 
 chai.use(chaiHttp);
 const expect = chai.expect;
