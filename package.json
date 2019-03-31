@@ -5,7 +5,7 @@
   "scripts": {
     "start": "nodemon src/app.js --exec babel-node",
     "debug": "nodemon src/app.js --inspect --exec babel-node",
-    "build": "babel src -d dist",
+    "build": "babel src --out-dir dist",
     "clean": "rm -rf ./dist; rm -rf ./node_modules",
     "serve": "node dist/app.js",
     "test": "mocha --require @babel/polyfill --require @babel/register --exit --timeout 6000 --recursive true"
@@ -16,24 +16,24 @@
   "description": "",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "dotenv": "^6.2.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.0",
-    "mongoose": "^5.4.18"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.4.20"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.3.4",
+    "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4",
-    "@babel/register": "^7.0.0",
+    "@babel/polyfill": "^7.4.0",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "mocha": "^6.0.2",
-    "mongodb-memory-server": "^4.0.2",
+    "mongodb-memory-server": "^4.2.1",
     "nodemon": "^1.18.10",
-    "sinon": "^7.2.7",
+    "sinon": "^7.3.1",
     "sinon-mongoose": "^2.2.1"
   }
 }

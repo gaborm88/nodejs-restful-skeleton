@@ -8,7 +8,7 @@ export default class UserDao {
   async findAll() {
     return await UserSchema.find({}).lean();
   }
- 
+
   async findById(id) {
     return await UserSchema.findById(id).lean();
   }
