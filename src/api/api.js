@@ -1,27 +1,19 @@
-import express from 'express';
-import bodyParser from 'body-parser';
+import express from 'express'
 
-import pingRoutes from './routes/pingRoutes';
-import { userRoutes } from './routes/userRoutes';
-import { authRoutes } from './routes/authRoutes';
+import pingRoutes from './routes/pingRoutes'
+import userRoutes from './routes/userRoutes'
+import authRoutes from './routes/authRoutes'
 
-import { logging } from './middleware/loggingMiddleware';
-import { verifyToken } from './middleware/authMiddleware';
+import { logging } from './middleware/loggingMiddleware'
 
-const app = express();
+const app = express()
 
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(express.json({ extended: false }))
 
-app.use(logging);
+app.use(logging)
 
-app.use('/', pingRoutes);
-app.use('/auth', authRoutes());
+app.use('/', pingRoutes)
+app.use('/auth', authRoutes)
+app.use('/users', userRoutes)
 
-// middleware
-app.use(verifyToken);
-
-// auth required routes
-app.use('/users', userRoutes());
-
-module.exports = app;
+module.exports = app
