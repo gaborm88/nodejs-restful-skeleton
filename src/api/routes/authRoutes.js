@@ -1,31 +1,44 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+const { check, validationResult } = require('express-validator/check')
 
 import config from '../../config'
 
 const router = express.Router()
 
-router.post('/login', (req, res) => {
-  const mockedUsername = 'admin'
-  const mockedPassword = 'password'
-  // todo validator
-  const username = req.body.username
-  const password = req.body.password
-  if (!username || !password) {
-    res.status(400).send({ success: false })
-    return
+router.post(
+  '/login',
+  [
+    check('username', 'Name is required')
+      .not()
+      .isEmpty(),
+    check(
+      'password',
+      'Please enter a password with 6 or more characters'
+    ).isLength({ min: 6 })
+  ],
+  (req, res) => {
+    const mockedUsername = 'admin'
+    const mockedPassword = 'password'
+    // todo validator
+    const username = req.body.username
+    const password = req.body.password
+    if (!username || !password) {
+      res.status(400).send({ success: false })
+      return
+    }
+    // todo
+    if (username === mockedUsername && password === mockedPassword) {
+      const token = jwt.sign({ username: username }, config.secret, {
+        expiresIn: '24h'
+      })
+      //res.json({ success: true, token: token });
+      res.status(200).send({ success: true, token: token })
+    } else {
+      res.status(403).send({ success: false })
+    }
   }
-  // todo
-  if (username === mockedUsername && password === mockedPassword) {
-    const token = jwt.sign({ username: username }, config.secret, {
-      expiresIn: '24h'
-    })
-    //res.json({ success: true, token: token });
-    res.status(200).send({ success: true, token: token })
-  } else {
-    res.status(403).send({ success: false })
-  }
-})
+)
 
 router.post('/register', (req, res) => {})
 
