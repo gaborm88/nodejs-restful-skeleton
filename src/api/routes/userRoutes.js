@@ -1,15 +1,12 @@
 import express from 'express'
 
-import UserController from '../../controller/UserController'
+import UserSchema from './../../model/UserSchema'
 import { verifyToken } from './../middleware/authMiddleware'
 
 const router = express.Router()
 
 router.get('/', verifyToken, (req, res) => {
-  const userController = new UserController()
-
-  userController
-    .findAll()
+  UserSchema.find({})
     .then(item => res.status(200).send(item))
     .catch(err => {
       console.log(err.message)
@@ -18,15 +15,13 @@ router.get('/', verifyToken, (req, res) => {
 })
 
 router.post('/', verifyToken, (req, res) => {
-  const userController = new UserController()
-
-  userController
-    .create({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      login: req.body.login,
-      addresses: req.body.addresses
-    })
+  const { firstName, lastName, login, addresses } = req.body
+  UserSchema.create({
+    firstName,
+    lastName,
+    login,
+    addresses
+  })
     .then(item => res.status(200).send(item))
     .catch(err => {
       console.log(err.message)
@@ -35,10 +30,7 @@ router.post('/', verifyToken, (req, res) => {
 })
 
 router.get('/:id', verifyToken, async (req, res) => {
-  const userController = new UserController()
-
-  userController
-    .findById(req.params.id)
+  UserSchema.findById(req.params.id)
     .then(item => res.status(200).send(item))
     .catch(err => {
       console.log(err.message)
@@ -47,10 +39,7 @@ router.get('/:id', verifyToken, async (req, res) => {
 })
 
 router.delete('/:id', verifyToken, (req, res) => {
-  const userController = new UserController()
-
-  userController
-    .delete(req.params.id)
+  UserSchema.findByIdAndRemove(req.params.id)
     .then(item => res.status(200).send(item))
     .catch(err => {
       console.log(err.message)
@@ -59,10 +48,9 @@ router.delete('/:id', verifyToken, (req, res) => {
 })
 
 router.put('/:id', verifyToken, (req, res) => {
-  const userController = new UserController()
-
-  userController
-    .update(req.params.id, req.body)
+  UserSchema.findByIdAndUpdate(req.params.id, req.body, {
+    new: true
+  })
     .then(item => res.status(200).send(item))
     .catch(err => {
       console.log(err.message)
