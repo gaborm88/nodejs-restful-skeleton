@@ -18,24 +18,20 @@ router.post(
     ).isLength({ min: 6 })
   ],
   (req, res) => {
-    const mockedUsername = 'admin'
-    const mockedPassword = 'password'
-    // todo validator
-    const username = req.body.username
-    const password = req.body.password
-    if (!username || !password) {
-      res.status(400).send({ success: false })
-      return
+    const errors = validationResult(req)
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() })
     }
+    const { username, password } = req.body
+
     // todo
-    if (username === mockedUsername && password === mockedPassword) {
+    if (username === 'admin' && password === 'password') {
       const token = jwt.sign({ username: username }, config.secret, {
         expiresIn: '24h'
       })
-      //res.json({ success: true, token: token });
-      res.status(200).send({ success: true, token: token })
+      res.status(200).send({ token: token })
     } else {
-      res.status(403).send({ success: false })
+      res.status(401).send({ error: [{ msg: 'Invalid credentials' }] })
     }
   }
 )
