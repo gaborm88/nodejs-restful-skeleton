@@ -13,10 +13,7 @@ router.post(
     check('username', 'Name is required')
       .not()
       .isEmpty(),
-    check(
-      'password',
-      'Please enter a password with 6 or more characters',
-    ).isLength({ min: 6 }),
+    check('password', 'Please enter a password with 6 or more characters').isLength({ min: 6 }),
   ],
   (req, res) => {
     const errors = validationResult(req);
@@ -25,7 +22,6 @@ router.post(
     }
     const { username, password } = req.body;
 
-    // todo
     if (username === 'admin' && password === 'password') {
       const token = jwt.sign({ username }, config.secret, {
         expiresIn: '24h',

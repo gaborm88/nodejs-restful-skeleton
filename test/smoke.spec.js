@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import sinonMongoose from 'sinon-mongoose';
 
-import server from '../src/app';
+import server from '../src/api/api';
 
 chai.use(chaiHttp);
 const { expect } = chai;
@@ -11,7 +11,7 @@ const { expect } = chai;
 describe('GET /', () => {
   it('should respond with pong', (done) => {
     chai
-      .request(server)
+      .request(server.listen())
       .get('/')
       .end((err, res) => {
         expect(res.text).to.be.equal('pong');

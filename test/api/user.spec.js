@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../../src/app';
+import server from '../../src/api/api';
 import DBManager from '../helper/DbHelper';
 import UserSchema from '../../src/models/UserSchema';
 
@@ -18,7 +18,7 @@ describe('CRUD api users', () => {
     await dbman.start();
 
     const authResult = await chai
-      .request(server)
+      .request(server.listen())
       .post('/auth/login')
       .set('Content-Type', 'application/json')
       .send({ username: 'admin', password: 'password' });
@@ -32,7 +32,7 @@ describe('CRUD api users', () => {
 
   it('should create user', (done) => {
     chai
-      .request(server)
+      .request(server.listen())
       .post('/users')
       .set('authorization', `Bearer ${token}`)
       .send(validUserAttributes)
@@ -48,7 +48,7 @@ describe('CRUD api users', () => {
     await createUser(validUserAttributes);
 
     const getUsersResp = await chai
-      .request(server)
+      .request(server.listen())
       .get('/users')
       .set('authorization', `Bearer ${token}`);
 
@@ -60,7 +60,7 @@ describe('CRUD api users', () => {
     const user = await createUser(validUserAttributes);
 
     const getUsersResp = await chai
-      .request(server)
+      .request(server.listen())
       .get(`/users/${user._id}`)
       .set('authorization', `Bearer ${token}`);
 
@@ -72,7 +72,7 @@ describe('CRUD api users', () => {
     const user = await createUser(validUserAttributes);
 
     const updateUserResp = await chai
-      .request(server)
+      .request(server.listen())
       .put(`/users/${user._id}`)
       .set('authorization', `Bearer ${token}`)
       .send(validUserAttributes);
@@ -84,7 +84,7 @@ describe('CRUD api users', () => {
     const user = await createUser(validUserAttributes);
 
     const deleteUserResp = await chai
-      .request(server)
+      .request(server.listen())
       .delete(`/users/${user._id}`)
       .set('authorization', `Bearer ${token}`);
 
@@ -101,7 +101,7 @@ describe('wrong users requests', () => {
     await dbman.start();
 
     const authResult = await chai
-      .request(server)
+      .request(server.listen())
       .post('/auth/login')
       .set('Content-Type', 'application/json')
       .send({ username: 'admin', password: 'password' });
@@ -127,7 +127,7 @@ describe('wrong users requests', () => {
 
   it('should return with a users', (done) => {
     chai
-      .request(server)
+      .request(server.listen())
       .get('/users/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
@@ -138,7 +138,7 @@ describe('wrong users requests', () => {
 
   it('should response with error during update a user', (done) => {
     chai
-      .request(server)
+      .request(server.listen())
       .put('/users/1')
       .set('authorization', `Bearer ${token}`)
       .send(validUserAttributes)
@@ -150,7 +150,7 @@ describe('wrong users requests', () => {
 
   it('should response with error during remove a user', (done) => {
     chai
-      .request(server)
+      .request(server.listen())
       .delete('/users/1')
       .set('authorization', `Bearer ${token}`)
       .end((err, res) => {
