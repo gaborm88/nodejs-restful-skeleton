@@ -1,25 +1,23 @@
-import jwt from 'jsonwebtoken'
-import config from '../../config'
+import jwt from 'jsonwebtoken';
+import config from '../../config';
 
 module.exports.verifyToken = (req, res, next) => {
-  let token = req.headers['authorization']
+  let token = req.headers.authorization;
 
   if (token && token.startsWith('Bearer ')) {
-    token = token.slice(7, token.length)
+    token = token.slice(7, token.length);
   } else {
     return res.status(401).send({
-      message: 'Auth token is not supplied'
-    })
+      message: 'Auth token is not supplied',
+    });
   }
 
-  jwt.verify(token, config.secret, (err, decoded) => {
+  jwt.verify(token, config.secret, (err) => {
     if (err) {
       return res.status(401).send({
-        message: 'Token is not valid'
-      })
-    } else {
-      // req.decoded = decoded;
-      next()
+        message: 'Token is not valid',
+      });
     }
-  })
-}
+    next();
+  });
+};

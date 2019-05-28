@@ -15,4 +15,4 @@ module.exports.logging = (req, res, next) => {
   });
 
   return next();
-}
+};

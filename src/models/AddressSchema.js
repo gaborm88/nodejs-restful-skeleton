@@ -6,3 +6,7 @@ const AddressSchema = new mongoose.Schema({
   state: String,
   zipCode: String,
 });
+
+const Address = mongoose.model('address', AddressSchema);
+
+module.exports = Address;

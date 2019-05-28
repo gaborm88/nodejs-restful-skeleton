@@ -1,4 +1,4 @@
-import "@babel/polyfill";
+import '@babel/polyfill';
 
 import config from './config';
 import { listen } from './server';
