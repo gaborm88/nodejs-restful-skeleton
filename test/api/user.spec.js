@@ -1,6 +1,6 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import server from '../../src/api/api';
+import server from '../../src/server';
 import DBManager from '../helper/DbHelper';
 import UserSchema from '../../src/models/UserSchema';
 

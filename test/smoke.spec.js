@@ -3,7 +3,7 @@ import chai from 'chai';
 import chaiHttp from 'chai-http';
 import sinonMongoose from 'sinon-mongoose';
 
-import server from '../src/api/api';
+import server from '../src/server';
 
 chai.use(chaiHttp);
 const { expect } = chai;
