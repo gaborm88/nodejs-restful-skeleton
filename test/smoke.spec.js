@@ -20,11 +20,10 @@ describe('GET /', () => {
   });
 });
 
-// TODO: do crud test for UserSchema
 const User = require('../src/models/UserSchema');
 
-describe('GET /users', () => {
-  it('should return all users', (done) => {
+describe('user CRUD test', () => {
+  it('find user', (done) => {
     const UserMock = sinon.mock(User);
     const expectedResult = { firstName: 'asd' };
     UserMock.expects('find').yields(null, expectedResult);

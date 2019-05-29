@@ -9,7 +9,6 @@ const { expect } = chai;
 
 const createUser = async user => await UserSchema.create(user);
 
-// TODO: after causing mongo error
 describe('CRUD api users', () => {
   const dbman = new DBManager();
   let token = null;
@@ -28,7 +27,6 @@ describe('CRUD api users', () => {
   afterEach(async () => {
     await dbman.cleanup();
   });
-  // after(async () => { await dbman.stop(); });
 
   it('should create user', (done) => {
     chai
@@ -92,7 +90,6 @@ describe('CRUD api users', () => {
   });
 });
 
-// TODO: after causing mongo error
 describe('wrong users requests', () => {
   const dbman = new DBManager();
   let token = null;
@@ -111,21 +108,8 @@ describe('wrong users requests', () => {
   afterEach(async () => {
     await dbman.cleanup();
   });
-  // after(async () => { await dbman.stop(); });
-  /* // this test doesn't make sense until validations
-  it("should create user", function (done) {
-    chai.request(server)
-      .post('/users')
-      .set('authorization', `Bearer ${token}`)
-      .send(validUserAttributes)
-      .end((err, res) => {
-        expect(res.status).to.equal(500);
-        done();
-      });
-  });
-  */
 
-  it('should return with a users', (done) => {
+  it('should return with a user', (done) => {
     chai
       .request(server.listen())
       .get('/users/1')
